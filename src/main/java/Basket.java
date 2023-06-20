@@ -1,3 +1,6 @@
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import java.io.*;
 import java.util.Arrays;
 
@@ -120,6 +123,31 @@ public class Basket implements Serializable{
         return basket;
     }
 
+    public void saveJson(File file) { //сохранение файла корзины в json
+        try (PrintWriter writer = new PrintWriter(file)) {
+            Gson gson = new GsonBuilder().setPrettyPrinting().create(); // построчное разделение текста в json
+            String json = gson.toJson(this);
+            writer.println(json);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static Basket loadFromJsonFile(File file) {
+        Basket basket = null;
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            StringBuffer stringBuffer = new StringBuffer();
+            String line = null;
+            while ((line = reader.readLine()) != null){
+                stringBuffer.append(line);
+            }
+            Gson gson = new Gson();
+            basket = gson.fromJson(stringBuffer.toString(),Basket.class);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return basket;
+    }
 
 
 }

@@ -10,7 +10,7 @@ public class Main {
 
         Basket basket = new Basket();
         if(saveFile.exists()){
-            basket = Basket.loadFromTxtFile(saveFile);
+            basket = Basket.loadFromJsonFile(saveFile);
         } else {
             basket = new Basket(products,prices);
         }
@@ -26,6 +26,9 @@ public class Main {
         basket.addToCart(1,1);
         basket.addToCart(2,1);
         basket.addToCart(3,1);
+        basket.addToCart(1,1);
+        basket.addToCart(2,1);
+        basket.addToCart(3,1);
         basket.saveTxt(saveFile);
         basket.printCart();
 
@@ -33,6 +36,10 @@ public class Main {
         clientLog.log(1,1);
         clientLog.log(2,1);
         clientLog.log(3,1);
+        clientLog.log(1,1);
+        clientLog.log(2,1);
+        clientLog.log(3,1);
+        basket.saveJson(saveFile);
         clientLog.exportAsCSV(new File("log.csv"));
 
 

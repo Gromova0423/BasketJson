@@ -34,4 +34,6 @@ target/
 out/
 basket.bin
 basket.txt
+XMLSettingsReeder.java
+shop.xml
 *.idea
